@@ -1,0 +1,68 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: game-build-advisor
+  datasource:
+    url: jdbc:mysql://localhost:3306/gba_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root        # 改成你的MySQL用户名
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+      database: 0
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  secret: "your-256-bit-secret-key-please-change-this-in-production"
+  access-token-expiration: 3600
+  refresh-token-expiration: 604800
+
+baidu:
+  ocr:
+    api-key: your_baidu_api_key
+    secret-key: your_baidu_secret_key
+    token-url: https://aip.baidubce.com/oauth/2.0/token
+    ocr-url: https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    access-key-id: your_access_key_id
+    access-key-secret: your_access_key_secret
+    bucket-name: your-bucket-name
+    base-url: https://your-bucket-name.oss-cn-hangzhou.aliyuncs.com
+logging:
+  level:
+    com.gba: DEBUG
+    org.springframework.security: INFO
